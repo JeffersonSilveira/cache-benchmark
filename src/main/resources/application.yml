@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:cache_db;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    platform: h2
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  cache:
+    type: redis
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+server:
+  port: 8080
