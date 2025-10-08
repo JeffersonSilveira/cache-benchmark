@@ -74,7 +74,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.30</version> <!-- versão atual compatível com Java 17+ -->
+            <scope>provided</scope>
         </dependency>
 
         <!-- Spring Boot Starter Test (for testing) -->

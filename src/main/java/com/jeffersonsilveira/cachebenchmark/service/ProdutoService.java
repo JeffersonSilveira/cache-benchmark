@@ -1,5 +1,6 @@
 package com.jeffersonsilveira.cachebenchmark.service;
 
+import com.jeffersonsilveira.cachebenchmark.exception.ProdutoNotFoundException;
 import com.jeffersonsilveira.cachebenchmark.model.Produto;
 import com.jeffersonsilveira.cachebenchmark.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class ProdutoService {
     public Produto getProdutoById(Long id) {
         simulateDelay();
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ProdutoNotFoundException(id));
     }
 
     private void simulateDelay() {
