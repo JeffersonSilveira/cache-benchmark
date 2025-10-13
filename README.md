@@ -110,3 +110,15 @@ Este documento descreve o fluxo de cache aplicado no serviço `ProdutoService`.
 - Spring Boot com dependências de cache e Redis configuradas.
 
 ---
+### Bonus: Já estava  esquecendo, acesse via navegador a url abaixo
+
+```bash
+http://localhost:8080/actuator/prometheus
+```
+
+### Procure por
+```nginx
+produto_service_calls_total
+```
+
+
