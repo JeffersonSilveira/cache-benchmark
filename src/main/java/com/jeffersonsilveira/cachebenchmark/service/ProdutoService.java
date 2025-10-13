@@ -3,22 +3,33 @@ package com.jeffersonsilveira.cachebenchmark.service;
 import com.jeffersonsilveira.cachebenchmark.exception.ProdutoNotFoundException;
 import com.jeffersonsilveira.cachebenchmark.model.Produto;
 import com.jeffersonsilveira.cachebenchmark.repository.ProdutoRepository;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import io.micrometer.core.instrument.Counter;
+
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class ProdutoService {
 
     private final ProdutoRepository repository;
+    private final Counter produtoCallsCounter;
+
+    public ProdutoService(ProdutoRepository produtoRepository, MeterRegistry meterRegistry) {
+        this.repository = produtoRepository;
+        this.produtoCallsCounter = meterRegistry.counter("produto.service.calls");
+    }
+
 
     @Cacheable(value = "produto", key = "#id")
     public Produto getProdutoById(Long id) {
+        produtoCallsCounter.increment(); // conta apenas cache miss
+
         log.info("Buscando produto no banco com id: {}", id);
         simulateDelay();
         return repository.findById(id)
