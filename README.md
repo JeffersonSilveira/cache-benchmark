@@ -122,3 +122,10 @@ produto_service_calls_total
 ```
 
 
+### Acessar
+- Prometheus: http://localhost:9090
+- -Grafana: http://localhost:3000
+
+### No Grafana
+- Adicione o Prometheus como data source(http://prometheus:9090)
+- Crie dashboard para produto_service_calls_total, jvm_memory_used_bytes.
